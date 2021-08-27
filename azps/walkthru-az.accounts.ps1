@@ -86,7 +86,7 @@ $DefaultProfile = Connect-AzAccount -subscriptionID $subid -UseDeviceAuthenticat
 Get-AzDefault  # See user defaults               
 
 Get-AzSubscription
-
+ 
 Get-Command set-AZ*Default* -Module Az.Accounts 
 
 Set-AzDefault -ResourceGroup $MySettings.ResourceGroup # -Region $MySettings.Region
