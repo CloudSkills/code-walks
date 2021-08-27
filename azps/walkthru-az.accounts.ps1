@@ -9,7 +9,7 @@ Exit #Prevent F5, Step thru command lines with F8
 $MySettings
 
 # test creating something with a default
-New-AzResourceGroup -Name "$MySettings.NamePrefix-rg" -Location $MySettings.Region -Subs
+New-AzResourceGroup -Name "$($MySettings.NamePrefix)-rg" -Location $MySettings.Region
 
 # Start with AZ.Accounts, so we can connect to our account
 # See commands, their nouns and verbs to get a high level sense of what we can do with this module
@@ -112,8 +112,9 @@ Import-AzContext -Path ~/.azure/dave_context.json
 # Use the REST API directly within Azure
 $accessToken = Get-AZAccessToken
 Invoke-AzRestMethod
-Invoke-AzRestMethod -Path "/subscriptions/{subscription}/resourcegroups/{resourcegroup}/providers/microsoft.operationalinsights/workspaces/{workspace}?api-version={API}" -Method GET
-
+/subscriptions/{subscriptionId}/resourcegroups?api-version=2021-04-01
+$RGJson = Invoke-AzRestMethod -Method GET -Path "/subscriptions/$($MySettings.SubscriptionID)/resourcegroups?api-version=2021-04-01" # /$MySettings.ResourceGroup/providers/microsoft.operationalinsights/workspaces/{workspace}?api-version={API}" 
+$RGObject =  ConvertFrom-json $RGJson
 
 ## OPTIONAL 
 ## Purpose: Turn off autosaving Azure credentials. Your login information will be forgotten the next time you open a PowerShell window
