@@ -6,7 +6,7 @@ RUN dotnet tool install --global PowerShell
 ENV PATH "$PATH:$HOME/.dotnet/tools"
 
 # Install AZ PowerShell Module, refer https://github.com/Azure/azure-powershell/blob/main/docker/Dockerfile-ubuntu-18.04
-FROM powershell as azmodule-layer
+FROM powershell-layer  as azmodule-layer
 
 ARG REPOSITORY=PSGallery
 ARG MODULE=Az
