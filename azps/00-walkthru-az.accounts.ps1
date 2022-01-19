@@ -1,15 +1,40 @@
 # Az.Accounts
 # refer: 
 # 
-Exit #Prevent F5, Step thru command lines with F8
+Exit #Prevent F5. Instead, place cursor on any line and step thru command with F8
 
+
+#region SETUP
 # get settings & secrets
 . ./_my.secrets.ps1
 . ./_my.settings.ps1
 $MySettings
 
-# test creating something with a default
-New-AzResourceGroup -Name "$($MySettings.NamePrefix)-rg" -Location $MySettings.Region
+#endregion
+
+#region LOGIN
+
+# FOR GITPOD, USE Connect-AzAccount -UseDeviceAuthentication
+# With Device auth
+Connect-AzAccount -UseDeviceAuthentication
+
+#Login-AzAccount looks helpful
+Get-Help Login-AzAccount -Examples
+# For windows users, try -ShowWindow
+Get-Help Login-AzAccount -Full
+
+
+#Login-AzAccount is an alias for 'Connect-AzAccount'
+Get-Alias -Definition Connect-AzAccount
+
+# Login interactively
+Get-Help Connect-AzAccount -Online
+# With Device auth
+Connect-AzAccount -UseDeviceAuthentication
+
+#endregion
+
+#region ASSESS AZ.ACCOUNTS MODULE
 
 # Start with AZ.Accounts, so we can connect to our account
 # See commands, their nouns and verbs to get a high level sense of what we can do with this module
@@ -23,20 +48,11 @@ Get-Command -Module Az.Accounts | Group-Object -Property Noun
 # What cmdlets work against AzAccount?
 Get-Command -Module Az.Accounts -Noun AzAccount
 
-
-#Login-AzAccount looks helpful
-Get-Help Login-AzAccount -Examples
-# For windows users, try -ShowWindow
-Get-Help Login-AzAccount -ShowWindow
+#endregion
 
 
-#Login-AzAccount is an alias for 'Connect-AzAccount'
-Get-Alias -Definition Connect-AzAccount
 
-# Login interactively
-Get-Help Connect-AzAccount -Online
-# With Device auth
-Connect-AzAccount -UseDeviceAuthentication
+
 <#returns
 WARNING: To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code xxxxxxx to authenticate.
 
