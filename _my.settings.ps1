@@ -4,5 +4,5 @@
 $MySettings = @{
     Region = 'eastus'
     ResourceGroup = 'walkthru-rg'
-    NamePrefix = 'dave2021'
+    NamePrefix = 'dave2022'
 } 
