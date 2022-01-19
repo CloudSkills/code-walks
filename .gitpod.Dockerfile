@@ -51,7 +51,7 @@ RUN pwsh -Command Set-PSRepository -Name ${REPOSITORY} -InstallationPolicy Trust
 FROM azmodule-layer AS azcli-layer
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-CMD [ "pwsh" ]
+CMD [ "/home/gitpod/.dotnet/tools/pwsh" ]
 
 ## TO TEST
 ## docker build -f .gitpod.Dockerfile -t gitpod-dockerfile-test .
