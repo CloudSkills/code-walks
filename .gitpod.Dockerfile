@@ -43,8 +43,13 @@ RUN pwsh -Command Set-PSRepository -Name ${REPOSITORY} -InstallationPolicy Trust
     pwsh -Command Install-Module -Name ${MODULE} -RequiredVersion ${VERSION} -Scope CurrentUser -Repository ${REPOSITORY} && \
     pwsh -Command Set-PSRepository -Name ${REPOSITORY} -InstallationPolicy Untrusted
 
+
 # create AzureRmContextSettings.json before it was generated
 # COPY ${CONFIG}/${AZURERM_CONTEXT_SETTINGS} ${AZURE}/${AZURERM_CONTEXT_SETTINGS}
+
+# install azcli per https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt
+FROM azmodule-layer AS azcli-layer
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 CMD [ "pwsh" ]
 
