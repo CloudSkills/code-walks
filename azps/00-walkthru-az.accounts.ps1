@@ -14,23 +14,21 @@ $MySettings
 
 #region LOGIN
 
+# LOGIN TO YOUR AZURE ACCOUNT (DEV, NOT PROD JUST YET :) ) 
 # FOR GITPOD, USE Connect-AzAccount -UseDeviceAuthentication
 # With Device auth
 Connect-AzAccount -UseDeviceAuthentication
 
-#Login-AzAccount looks helpful
-Get-Help Login-AzAccount -Examples
-# For windows users, try -ShowWindow
-Get-Help Login-AzAccount -Full
+<# displays
+WARNING: To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code xxxxxxx to authenticate.
+#>
 
+<# after login, this displays
+Account            SubscriptionName TenantId                             Environment
+-------            ---------------- --------                             -----------
+my@email.com                  guid-here                            AzureCloud
+#>
 
-#Login-AzAccount is an alias for 'Connect-AzAccount'
-Get-Alias -Definition Connect-AzAccount
-
-# Login interactively
-Get-Help Connect-AzAccount -Online
-# With Device auth
-Connect-AzAccount -UseDeviceAuthentication
 
 #endregion
 
@@ -40,55 +38,52 @@ Connect-AzAccount -UseDeviceAuthentication
 # See commands, their nouns and verbs to get a high level sense of what we can do with this module
 Get-Command -Module Az.Accounts
 # See verbs
-Get-Command -Module Az.Accounts | Group-Object -Property Verb
+Get-Command -Module Az.Accounts | Group-Object -Property Verb | Sort-Object
 # See nouns
-Get-Command -Module Az.Accounts | Group-Object -Property Noun
-       
+Get-Command -Module Az.Accounts | Group-Object -Property Noun | Sort-Object
+ 
 
-# What cmdlets work against AzAccount?
+# For example, what cmdlets work against AzAccount?
 Get-Command -Module Az.Accounts -Noun AzAccount
+
+
+# Look at the Get-* cmdlets for a given module to see what I can see
+Get-Command -Module Az.Accounts -Verb Get
+# or
+Get-Command Get-AZ* -Module Az.Accounts | Sort-Object
+# See what some of the Az.Account cmdlets return
+
+Get-AzAccessToken
+Get-AzContext
+Get-AzContextAutosaveSetting  # Where are context files stored
+Get-AzDefault  # Where are context files stored
+Get-AzDomain # What domains are associated with this account?
+Get-AzEnvironment  # Where are context files stored
+Get-AzSubscription # See subscription
+Get-AzTenant # See tenant
+
+# Save some properties that are returned into our $MySettings variable
+# use (Get-AzContext).Tenant.Id to get the Tenant ID
+$MySettings.SubscriptionID = (Get-AzSubscription)[0].Id
+$MySettings.TenantID = (Get-AzSubscription)[0].TenantId
+$MySettings
 
 #endregion
 
 
 
-
-<#returns
-WARNING: To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code xxxxxxx to authenticate.
-
-Account            SubscriptionName TenantId                             Environment
--------            ---------------- --------                             -----------
-my@email.com                  guid-here                            AzureCloud
-#>
+##################
+# EXTRA CONTENT
+##################
 
 #Alternately. login with credential
 Get-Help Get-Credential -Examples
 $cred = Get-Credential  # todo pull from big hashtable in _secrets.ps1
 Connect-AzAccount -Credential $cred #not yet supported in PSCore/PS7
 
-# First, I like to look at the Get-* cmdlets for a given module to see what I can see
-Get-Command -Module Az.Accounts -Verb Get
-# or
-Get-Command Get-AZ* -Module Az.Accounts 
-# See what some use Az.Account cmdlets return
-
-Get-AzContext  # See if we're connected to any accounts already    
-
-# use (Get-AzContext).Tenant.Id to get the Tenant ID
-$MySettings.SubscriptionID =  (Get-AzSubscription)[0].Id
-$MySettings.TenantID = (Get-AzSubscription)[0].TenantId
-$MySettings
 
 $context = Set-AzContext -Name 'WalkthruContext' -Subscription (Get-AzSubscription)[0].Name -Tenant $MySettings.TenantID
-
-
-# Other commands to review
-Get-AzContextAutosaveSetting  # Where are context files stored
-Get-AzDefault  # See user defaults               
-Get-AzEnvironment # See the different Azure clouds            
-Get-AzProfile # Service profiles?                 
-Get-AzSubscription # See subscription           
-Get-AzTenant # See tenant
+$context
 
 
 
@@ -111,20 +106,20 @@ Set-AzDefault -ResourceGroup $MySettings.ResourceGroup # -Region $MySettings.Reg
 Get-AzContext
 $DefaultProfile | Select-AzContext "Default"
 
-Save-AzContext -Path ~/.azure/dave_context.json
-cat ~/.azure/dave_context.json
+Save-AzContext -Path ~/.azure/my_context.json
+cat ~/.azure/my_context.json
 
 
 ## NEXT TIME Load it from file
-Import-AzContext -Path ~/.azure/dave_context.json
+Import-AzContext -Path ~/.azure/my_context.json
 
 
 
 # ./walkthru-az.resources.ps1
 
+Clear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUser
 
-
-
+Logout-AzAccountLogout-AzAccountLogout-AzAccountLogout-AzAccountLogout-AzAccountLogout-AzAccountLogout-AzAccountLogout-AzAccountLogout-AzAccountLogout-AzAccountLogout-AzAccountLogout-AzAccountLogout-AzAccountLogout-AzAccountLogout-AzAccount
 # Use the REST API directly within Azure
 $accessToken = Get-AZAccessToken
 Invoke-AzRestMethod
