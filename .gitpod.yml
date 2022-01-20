@@ -7,3 +7,4 @@ vscode:
        - ms-vscode.azure-account
        - ms-vscode.azurecli
        - eamodio.gitlens
+       - ms-azuretools.vscode-docker
