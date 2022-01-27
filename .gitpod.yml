@@ -8,5 +8,3 @@ vscode:
        - ms-vscode.azurecli
        - ms-azuretools.vscode-docker
        - akosyakov.gitpod-monitor
-
-#        - eamodio.gitlens
