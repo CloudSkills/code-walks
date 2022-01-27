@@ -3,7 +3,8 @@ image:
 
 vscode:
     extensions:
-       - ms-vscode.powershell
+       - panekj.powershell
        - ms-vscode.azure-account
        - ms-vscode.azurecli
-       - eamodio.gitlens
+       - ms-azuretools.vscode-docker
+       - akosyakov.gitpod-monitor
