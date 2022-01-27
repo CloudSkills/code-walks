@@ -115,7 +115,6 @@ Import-AzContext -Path ~/.azure/my_context.json
 
 
 
-# ./walkthru-az.resources.ps1
 
 Clear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUserClear-AzContext -Scope CurrentUser
 
