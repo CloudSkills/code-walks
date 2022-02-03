@@ -36,6 +36,7 @@ $groups
 $groups[0]
 
 Get-AzADGroupMember -GroupObjectId $groups[0].Id
+
 Get-AzADServicePrincipal -First 20
 $sps = Get-AzADServicePrincipal -First 20
 $sps[0]
@@ -48,6 +49,8 @@ $users = Get-AzADUser -First 20
 $users
 
 $users[0] | Select *
+
+$users[0] | Get-Member
 
 #endregion
 

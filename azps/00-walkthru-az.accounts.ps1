@@ -38,9 +38,9 @@ my@email.com                  guid-here                            AzureCloud
 # See commands, their nouns and verbs to get a high level sense of what we can do with this module
 Get-Command -Module Az.Accounts
 # See verbs
-Get-Command -Module Az.Accounts | Group-Object -Property Verb | Sort-Object
+Get-Command -Module Az.Accounts | Group-Object -Property Verb | Sort-Object -Property Count -Descending
 # See nouns
-Get-Command -Module Az.Accounts | Group-Object -Property Noun | Sort-Object
+Get-Command -Module Az.Accounts | Group-Object -Property Noun | Sort-Object -Property Count -Descending
  
 
 # For example, what cmdlets work against AzAccount?
