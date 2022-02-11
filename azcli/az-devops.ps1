@@ -2,6 +2,8 @@
 # Refer : https://docs.microsoft.com/en-us/azure/devops/cli/log-in-via-pat?view=azure-devops&tabs=windows
 # Shell is pwsh
 
+#login to az cli first
+az login
 ## REQUIREMENTS: Create and copy your Personal Access Token (PAT) first via UI, refer https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=preview-page#frequently-asked-questions-faqs
 
 ## INSTALL azure-devops extension
@@ -13,12 +15,21 @@ az extension add --name azure-devops --debug
 ## DEFINE VARIABLES
 ## **CHANGE THESE FOR YOUR ENVIRONMENT**
 $pat = Get-clipboard # run this after creating the PAT and copying to clipboard
-$myDevOpsOrg = 'dclearning'
-$myProjectName = 'AKSDemo'
+$myDevOpsOrgUrl = "https://dev.azure.com/yourorgname"
+$myDevOpsOrgUrl
+$env:AZURE_DEVOPS_EXT_PAT = $pat
 
+az devops login --debug
+
+
+az devops configure -h
+
+az devops configure --defaults organization=$myDevOpsOrgUrl
+$myProjectName = 'PartsUnlimited'
 
 # login to your devops org
-$pat | az devops login --organization https://dev.azure.com/$myDevOpsOrg --verbose
+
+# az devops login --organization https://dev.azure.com/$myDevOpsOrg --verbose
 
 # review az devops commands
 az devops -h
@@ -51,6 +62,8 @@ $s | Select-Object extensionId, extensionName, shortDescription
 az devops project -h
 az devops project list -o table
 az devops project show -p $myProjectName
+
+
 
 az devops project create -h
 az devops project create --name az-cli-devops-demo --open
