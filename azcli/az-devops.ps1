@@ -15,21 +15,22 @@ az extension add --name azure-devops --debug
 ## DEFINE VARIABLES
 ## **CHANGE THESE FOR YOUR ENVIRONMENT**
 $pat = Get-clipboard # run this after creating the PAT and copying to clipboard
+# change next line to your azure devops org url
 $myDevOpsOrgUrl = "https://dev.azure.com/yourorgname"
 $myDevOpsOrgUrl
 $env:AZURE_DEVOPS_EXT_PAT = $pat
-
-az devops login --debug
 
 
 az devops configure -h
 
 az devops configure --defaults organization=$myDevOpsOrgUrl
+# login to your devops org
+az devops login --debug
+
+
+# change to the AZDO project you want to work with
 $myProjectName = 'PartsUnlimited'
 
-# login to your devops org
-
-# az devops login --organization https://dev.azure.com/$myDevOpsOrg --verbose
 
 # review az devops commands
 az devops -h
