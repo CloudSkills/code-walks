@@ -17,8 +17,8 @@ ARG AZURERM_CONTEXT_SETTINGS=AzureRmContextSettings.json
 ARG AZURE=/root/.Azure
 ARG VCS_REF="none"
 ARG BUILD_DATE=
-# TODO remove hard coded VERSION
-ARG VERSION=7.1.0  
+# refer https://hub.docker.com/_/microsoft-azure-powershell
+ARG VERSION=7.4.0  
 ARG IMAGE_NAME=mcr.microsoft.com/azure-powershell:${VERSION}-ubuntu-18.04
 
 ENV AZUREPS_HOST_ENVIRONMENT="dockerImage/${VERSION}-ubuntu-18.04"
@@ -27,7 +27,8 @@ ENV AZUREPS_HOST_ENVIRONMENT="dockerImage/${VERSION}-ubuntu-18.04"
 RUN pwsh -Command Set-PSRepository -Name ${REPOSITORY} -InstallationPolicy Trusted && \
 #    pwsh -Command Install-Module -Name ${MODULE} -RequiredVersion ${VERSION} -Scope CurrentUser -Repository ${REPOSITORY} && \
     pwsh -Command Install-Module -Name ${MODULE} -Scope CurrentUser -Repository ${REPOSITORY} && \
-    pwsh -Command Install-Module -Name AzureAD -Scope CurrentUser -Repository ${REPOSITORY} && \
+#    pwsh -Command Install-Module -Name AzureAD -Scope CurrentUser -Repository ${REPOSITORY} && \
+    pwsh -Command Install-Module -Name AzureADPreview -Scope CurrentUser -Repository ${REPOSITORY} && \
     pwsh -Command Set-PSRepository -Name ${REPOSITORY} -InstallationPolicy Untrusted
 
 
